@@ -6,9 +6,9 @@ import java.io.InputStreamReader;
 public class Cowsay {
   public static String run(String input) {
     ProcessBuilder processBuilder = new ProcessBuilder();
-    String cmd = "/usr/games/cowsay '" + input + "'";
-    System.out.println(cmd);
-    processBuilder.command("bash", "-c", cmd);
+    // The input is passed as a single argv element and never interpreted by a shell.
+    // "--" prevents the input from being parsed as a cowsay option.
+    processBuilder.command("/usr/games/cowsay", "--", input);
 
     StringBuilder output = new StringBuilder();
 
